@@ -1,23 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const authController = require("../controllers/blog.controller");
+const blogController = require("../controllers/blog.controller");
 
 const {
   titleValidate,
   contentValidate,
-  statusValidate,
 } = require("../middleware/input.validator");
 
-router.post("/add", [titleValidate, contentValidate], authController.addBlog);
+router.post("/add", [titleValidate, contentValidate], blogController.addBlog);
 
-router.put(
-  "/update/:id",
-  [titleValidate, contentValidate],
-  authController.updateBlogById
-);
+router.put("/update/:id", blogController.updateBlogById);
 
-router.get("/get", authController.getBlogs);
+router.get("/get", blogController.getBlogs);
 
-router.delete("/delete/:id", authController.deleteBlog);
+router.delete("/delete/:id", blogController.deleteBlog);
 
 module.exports = router;

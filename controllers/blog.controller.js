@@ -3,13 +3,13 @@ const Blog = db.blogs;
 const User = db.users;
 const inputErrorValidation = require("../middleware/inputError.validation");
 
-const addBlog = (req, res, next) => {
+const addBlog = async (req, res, next) => {
   try {
     inputErrorValidation(req);
 
-    Blog.create({ ...req.body, author: req.user.id });
+    await Blog.create({ ...req.body, author: req.user.id });
 
-    res.status(201).json({ message: "Blog added successfully" });
+    res.status(201).json({ status: true, message: "Blog added successfully" });
   } catch (error) {
     next(error);
   }
@@ -37,11 +37,13 @@ const updateBlogById = async (req, res, next) => {
       throw error;
     }
 
-    Blog.update(req.body, {
+    await Blog.update(req.body, {
       where: { id: blogId },
     });
 
-    res.status(200).json({ message: "Blog updated successfully" });
+    res
+      .status(200)
+      .json({ status: true, message: "Blog updated successfully" });
   } catch (error) {
     console.log(error);
     next(error);
@@ -85,7 +87,7 @@ const getBlogs = async (req, res, next) => {
       ],
     });
 
-    res.status(200).json({ data: blogs });
+    res.status(200).json({ status: true, data: blogs });
   } catch (error) {
     next(error);
   }
@@ -110,10 +112,11 @@ const getBlogById = async (blogId) => {
 const deleteBlog = async (req, res, next) => {
   try {
     const blogId = req.params.id;
+    const authorId = req.user.id;
 
     const blogDetails = await getBlogById(blogId);
 
-    if (blogDetails.author !== req.user.id) {
+    if (blogDetails.author !== authorId) {
       const error = new Error("You don't have access");
       error.statusCode = 403;
       throw error;
@@ -123,7 +126,9 @@ const deleteBlog = async (req, res, next) => {
       where: { id: blogId },
     });
 
-    res.status(200).json({ message: "Blog deleted successfully" });
+    res
+      .status(200)
+      .json({ status: true, message: "Blog deleted successfully" });
   } catch (error) {
     next(error);
   }

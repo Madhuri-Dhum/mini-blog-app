@@ -22,10 +22,11 @@ npm start
 # Only an admin can update the status; otherwise, non-admin users can only update the blog details.
 
 # for get blogs API
+When you will check by userId then pass userId 
 # Admins:
 Can view all blogs.
 Can filter by status (Pending, Approved, Cancelled).
-Can filter by userId if provided.
+Can filter by userId if provided. (pass user Id)
 
 # Non-admin Users with myBlogs=true:
 Can view their own blogs (where author matches req.user.id).
@@ -33,4 +34,4 @@ Can filter by status.
 
 # Non-admin Users without myBlogs=true:
 Can only view approved blogs.
-Can filter by userId if provided (for example, if userId is given, show approved blogs from that user).
+Can filter by userId if provided (pass user Id) (for example, if userId is given, show approved blogs from that user).

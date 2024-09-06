@@ -22,7 +22,9 @@ const userRegistration = async (req, res, next) => {
 
     User.create({ ...req.body, password: hashPassword });
 
-    res.status(201).json({ message: "User registered successfully" });
+    res
+      .status(201)
+      .json({ status: true, message: "User registered successfully" });
   } catch (error) {
     next(error);
   }
@@ -60,6 +62,7 @@ const userLogin = async (req, res, next) => {
     });
 
     res.status(200).json({
+      status: true,
       message: "User login successfully",
       data: {
         ...userPayload,

@@ -20,8 +20,4 @@ module.exports = {
     .trim()
     .notEmpty()
     .withMessage("Content is required"),
-  statusValidate: check("status")
-    .trim()
-    .notEmpty()
-    .withMessage("Status is required"),
 };
