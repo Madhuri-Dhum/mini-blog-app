@@ -1,0 +1,22 @@
+{
+  "name": "mini-blog-app",
+  "version": "1.0.0",
+  "description": "Mini Blog App is a simple blogging platform built with Express.js. This project provides essential functionalities for user authentication, blog creation, and blog management.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "Madhuri Dhum",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-validator": "^7.2.0",
+    "mysql2": "^3.11.0",
+    "nodemon": "^3.1.4",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2"
+  }
+}
