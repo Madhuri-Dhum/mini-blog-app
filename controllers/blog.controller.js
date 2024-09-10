@@ -25,7 +25,7 @@ const updateBlogById = async (req, res, next) => {
 
     const blogDetails = await getBlogById(blogId);
 
-    if (blogDetails.author !== id && !isAdmin) {
+    if (blogDetails.dataValues.author !== id && !isAdmin) {
       const error = new Error("You don't have access");
       error.statusCode = 403;
       throw error;
@@ -45,7 +45,6 @@ const updateBlogById = async (req, res, next) => {
       .status(200)
       .json({ status: true, message: "Blog updated successfully" });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
@@ -116,7 +115,7 @@ const deleteBlog = async (req, res, next) => {
 
     const blogDetails = await getBlogById(blogId);
 
-    if (blogDetails.author !== authorId) {
+    if (blogDetails.dataValues.author !== authorId) {
       const error = new Error("You don't have access");
       error.statusCode = 403;
       throw error;
